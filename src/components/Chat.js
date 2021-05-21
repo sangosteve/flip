@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import SendIcon from "@material-ui/icons/Send";
 
 const Chat = () => {
   return (
@@ -10,6 +11,7 @@ const Chat = () => {
       <ChatBody></ChatBody>
       <ChatFooter>
         <textarea placeholder="Write a message"></textarea>
+        <SendIcon />
       </ChatFooter>
     </ChatContainer>
   );
@@ -43,19 +45,23 @@ const Content = styled.div`
 `;
 
 const ChatFooter = styled.div`
-  padding: 20px 30px;
-
+  padding: 20px 20px;
+  border-top: solid 1px #ededed;
   > textarea {
     flex-grow: 1;
     overflow: hidden;
-    border-color: solid 1px #ededed;
-    width: 100%;
-    height: 100px;
+    width: 90%;
+    height: 20px;
     padding: 5px;
     resize: none;
-    border-radius: 5px;
+    border: none;
   }
   > textarea:focus {
     outline: none;
+  }
+  > .MuiSvgIcon-root {
+    color: #1cdf5e;
+    font-size: 30px;
+    cursor: pointer;
   }
 `;

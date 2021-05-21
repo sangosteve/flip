@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOutlined";
 import MoreVertOutlinedIcon from "@material-ui/icons/MoreVertOutlined";
-import NotificationsNoneOutlinedIcon from "@material-ui/icons/NotificationsNoneOutlined";
+
 import ContactList from "./ContactList";
 
 const Sidebar = () => {
@@ -12,7 +12,6 @@ const Sidebar = () => {
         <HeaderTitle>
           <h4>Chats</h4>
           <HeaderAction>
-            <NotificationsNoneOutlinedIcon />
             <MoreVertOutlinedIcon />
           </HeaderAction>
         </HeaderTitle>
@@ -62,7 +61,7 @@ const HeaderTitle = styled.div`
 
   > h4 {
     font-weight: 500;
-    color: var(--text-color);
+    color: #23c85b;
   }
 `;
 
@@ -79,6 +78,9 @@ const HeaderOptions = styled.div`
   justify-content: space-around;
 
   > button {
+    background-color: #1cdf5e;
+    border: none;
+    color: #fff;
     width: 100px;
   }
 `;
