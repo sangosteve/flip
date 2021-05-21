@@ -26,7 +26,7 @@ const HeaderContainer = styled.div`
   display: flex;
   padding: 10px 0;
   align-items: center;
-  border: solid 1px #ededed;
+  border: var(--border-color);
   display: flex;
   justify-content: flex-end;
   width: 100%;

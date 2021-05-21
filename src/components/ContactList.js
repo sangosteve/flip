@@ -24,6 +24,55 @@ function ContactList() {
       lastMessage: "Talk later im getting into a meeting right now",
       lastMessageTime: "10 mins",
     },
+    {
+      id: 4,
+      displayName: "steve sango",
+      userImg: "https://via.placeholder.com/150",
+      lastMessage: "Talk later im getting into a meeting right now",
+      lastMessageTime: "10 mins",
+    },
+    {
+      id: 5,
+      displayName: "steve sango",
+      userImg: "https://via.placeholder.com/150",
+      lastMessage: "Talk later im getting into a meeting right now",
+      lastMessageTime: "10 mins",
+    },
+    {
+      id: 6,
+      displayName: "steve sango",
+      userImg: "https://via.placeholder.com/150",
+      lastMessage: "Talk later im getting into a meeting right now",
+      lastMessageTime: "10 mins",
+    },
+    {
+      id: 7,
+      displayName: "steve sango",
+      userImg: "https://via.placeholder.com/150",
+      lastMessage: "Talk later im getting into a meeting right now",
+      lastMessageTime: "10 mins",
+    },
+    {
+      id: 8,
+      displayName: "steve sango",
+      userImg: "https://via.placeholder.com/150",
+      lastMessage: "Talk later im getting into a meeting right now",
+      lastMessageTime: "10 mins",
+    },
+    {
+      id: 9,
+      displayName: "steve sango",
+      userImg: "https://via.placeholder.com/150",
+      lastMessage: "Talk later im getting into a meeting right now",
+      lastMessageTime: "10 mins",
+    },
+    {
+      id: 10,
+      displayName: "steve sango",
+      userImg: "https://via.placeholder.com/150",
+      lastMessage: "Talk later im getting into a meeting right now",
+      lastMessageTime: "10 mins",
+    },
   ]);
   return (
     <ContactListContainer>
