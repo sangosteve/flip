@@ -1,18 +1,59 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { db } from "../config/firebase";
+import { useCollection } from "react-firebase-hooks/firestore";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth, provider } from "../config/firebase";
+import firebase from "firebase";
 import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOutlined";
 import MoreVertOutlinedIcon from "@material-ui/icons/MoreVertOutlined";
+import GroupAddOutlinedIcon from "@material-ui/icons/GroupAddOutlined";
+import { Button, Modal } from "react-bootstrap";
 
-import ContactList from "./ContactList";
+import GroupList from "./GroupList";
 
 const Sidebar = () => {
+  const [newGroupName, setNewGroupName] = useState("");
+  const [user, loading] = useAuthState(auth);
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const addGroup = () => {
+    if (newGroupName) {
+      db.collection("groups")
+        .add({
+          name: newGroupName,
+          createdBy: user.uid,
+          members: [user.uid],
+          groupIcon: null,
+          groupType: 1,
+        })
+        .then((docRef) => {
+          //get the users collection where userId = current user
+          db.collection("users")
+            .doc(user.uid)
+            .update({
+              groups: firebase.firestore.FieldValue.arrayUnion(docRef.id),
+            });
+          //add recently added group document id to userGroups
+          console.log(docRef.id);
+          //close modal
+          setNewGroupName("");
+          handleClose();
+        });
+    }
+  };
+
   return (
     <SidebarContainer>
       <SidebarHeader>
         <HeaderTitle>
           <h4>Chats</h4>
           <HeaderAction>
-            <MoreVertOutlinedIcon />
+            <GroupAddOutlinedIcon onClick={handleShow} />
           </HeaderAction>
         </HeaderTitle>
 
@@ -24,8 +65,34 @@ const Sidebar = () => {
         </HeaderOptions>
       </SidebarHeader>
       <SidebarBody>
-        <ContactList />
+        <GroupList />
       </SidebarBody>
+
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <input
+            type="text"
+            value={newGroupName}
+            onChange={(e) => setNewGroupName(e.target.value)}
+          />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={addGroup}>
+            Submit
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </SidebarContainer>
   );
 };

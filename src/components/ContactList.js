@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import ContactCard from "./ContactCard.js";
 import styled from "styled-components";
+import { db } from "../config/firebase";
+import { useCollection } from "react-firebase-hooks/firestore";
+import { RoomContext } from "../contexts/RoomContext";
 function ContactList() {
+  const [channels, loading, error] = useCollection(db.collection("groups"));
   const [contacts, setContacts] = useState([
     {
       id: 1,

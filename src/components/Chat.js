@@ -1,17 +1,75 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import SendIcon from "@material-ui/icons/Send";
+import { RoomContext } from "../contexts/RoomContext";
+import firebase from "firebase";
+import { db } from "../config/firebase";
+import { useCollection, useDocument } from "react-firebase-hooks/firestore";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth, provider } from "../config/firebase";
+import Message from "./Message";
 
 const Chat = () => {
+  const [user] = useAuthState(auth);
+
+  const { roomId, setRoomId } = useContext(RoomContext);
+  const [newMessage, setNewMessage] = useState("");
+  const [roomDetails] = useDocument(
+    roomId && db.collection("groups").doc(roomId)
+  );
+
+  const [roomMessages] = useCollection(
+    roomId &&
+      db
+        .collection("message")
+        .doc(roomId)
+        .collection("messages")
+        .orderBy("sentAt", "asc")
+  );
+
+  const saveMessage = () => {
+    db.collection("message")
+      .doc(roomId)
+      .collection("messages")
+      .add({
+        messageText: newMessage,
+        sentAt: firebase.firestore.FieldValue.serverTimestamp(),
+        sentBy: user.uid,
+      })
+      .then(() => setNewMessage(""));
+  };
   return (
     <ChatContainer>
       <ChatHeader>
-        <h6>Header</h6>
+        <h6>{roomDetails?.data().name}</h6>
       </ChatHeader>
-      <ChatBody></ChatBody>
+      <ChatBody>
+        {roomMessages?.docs.map((doc) => {
+          const { messageText, sentAt, sentBy } = doc.data();
+          {
+            /* db.collection("users")
+            .doc(sentBy)
+            .get()
+            .then((userDetails) => {
+              // console.log(userDetails.data());
+              setSender(userDetails.data());
+              console.log(sender?.sender.userId);
+            }); */
+          }
+          return (
+            <Message key={doc.id} messageText={messageText} sentAt={sentAt} />
+          );
+        })}
+      </ChatBody>
       <ChatFooter>
-        <textarea placeholder="Write a message"></textarea>
-        <SendIcon />
+        <textarea
+          placeholder="Write a message"
+          value={newMessage}
+          onChange={(e) => {
+            setNewMessage(e.target.value);
+          }}
+        ></textarea>
+        <SendIcon onClick={saveMessage} />
       </ChatFooter>
     </ChatContainer>
   );

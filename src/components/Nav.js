@@ -5,7 +5,21 @@ import CallIcon from "@material-ui/icons/Call";
 import GroupIcon from "@material-ui/icons/Group";
 import SettingsIcon from "@material-ui/icons/Settings";
 import NotificationsNoneOutlinedIcon from "@material-ui/icons/NotificationsNoneOutlined";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth, provider } from "../config/firebase";
 const Nav = () => {
+  const [user] = useAuthState(auth);
+
+  const signOut = () => {
+    auth
+      .signOut()
+      .then(() => {
+        console.log("Signed Out Successfully");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <NavContainer>
       <NavContents>
@@ -19,7 +33,7 @@ const Nav = () => {
           <SettingsIcon />
         </NavBody>
         <NavFooter>
-          <UserAvatar src="https://via.placeholder.com/150" />
+          <UserAvatar src={user?.photoURL} onClick={signOut} />
         </NavFooter>
       </NavContents>
     </NavContainer>
@@ -79,4 +93,5 @@ const UserAvatar = styled.img`
   height: 50px;
   border-radius: 50%;
   border: solid 3px white;
+  cursor: pointer;
 `;
