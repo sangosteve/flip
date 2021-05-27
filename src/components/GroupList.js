@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import { db } from "../config/firebase";
 import { useCollection } from "react-firebase-hooks/firestore";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth, provider } from "../config/firebase";
 import { RoomContext } from "../contexts/RoomContext";
 import styled from "styled-components";
 import GroupCard from "./GroupCard";
 
 const GroupList = () => {
-  const [channels, loading, error] = useCollection(db.collection("groups"));
+  const [user] = useAuthState(auth);
+  const [channels, loading, error] = useCollection(
+    db.collection("groups").where("members", "array-contains", user.uid)
+  );
 
   return (
     <GroupListContainer>
