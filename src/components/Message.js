@@ -27,6 +27,10 @@ const Message = ({
 
 export default Message;
 
+const MessageBody = styled.div`
+  font-size: 13px;
+  font-family: Open Sans;
+`;
 const MessageContainer = styled.div`
   display: flex;
   align-self: flex-start;
@@ -43,7 +47,7 @@ const MessageContainer = styled.div`
     flex-direction: row-reverse;
     align-self: flex-end;
     > div {
-      background-color: #1cdf5e;
+      background-color: #0984e3;
       color: #fff;
     }
   }
@@ -64,9 +68,4 @@ const MessageHeader = styled.div`
     font-weight: 500;
     font-family: roboto;
   }
-`;
-
-const MessageBody = styled.div`
-  font-size: 13px;
-  font-family: Open Sans;
 `;

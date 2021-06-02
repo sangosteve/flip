@@ -112,6 +112,7 @@ const Chat = () => {
           </Modal.Header>
           <Modal.Body>
             <Multiselect
+              showArrow={false}
               options={options} // Options to display in the dropdown
               displayValue="userEmail" // Property name to display in the dropdown options
               onSelect={onSelect}
@@ -182,6 +183,7 @@ const ChatHeader = styled.div`
   > h6 {
     font-family: Roboto;
     font-size: 14px;
+    color: #626570;
   }
   > .MuiSvgIcon-root {
     font-size: 30px;
@@ -221,7 +223,7 @@ const ChatFooter = styled.div`
     outline: none;
   }
   > .MuiSvgIcon-root {
-    color: #1cdf5e;
+    color: #0984e3;
     font-size: 30px;
     cursor: pointer;
   }

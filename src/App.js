@@ -34,7 +34,7 @@ function App() {
           ) : (
             <Switch>
               <Route exact path="/">
-                <Nav />
+                {/* <Nav /> */}
                 <Sidebar />
                 <Chat />
               </Route>

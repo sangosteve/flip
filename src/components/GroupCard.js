@@ -25,11 +25,11 @@ const GroupCardContainer = styled.div`
   margin-top: 2px;
   padding: 10px;
   cursor: pointer;
-  border: solid 1px #ededed;
+  /* border: solid 1px #ededed; */
 `;
 
 const GroupIcon = styled.img`
-  width: 24px;
-  height: 24px;
-  border-radius: 3px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
 `;

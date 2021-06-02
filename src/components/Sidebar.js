@@ -53,16 +53,16 @@ const Sidebar = () => {
         <HeaderTitle>
           <h4>Chats</h4>
           <HeaderAction>
-            <GroupAddOutlinedIcon onClick={handleShow} />
+            <MoreVertOutlinedIcon onClick={handleShow} />
           </HeaderAction>
         </HeaderTitle>
 
-        <HeaderOptions>
+        {/* <HeaderOptions>
           <button>All Chats</button>
           <HeaderSearch>
             <input type="text" placeholder="Search messages" />
           </HeaderSearch>
-        </HeaderOptions>
+        </HeaderOptions> */}
       </SidebarHeader>
       <SidebarBody>
         <GroupList />
@@ -112,7 +112,7 @@ const SidebarContainer = styled.div`
 const SidebarHeader = styled.div`
   overflow: hidden;
   width: 350px;
-  max-height: 150px;
+  max-height: 60px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -128,7 +128,7 @@ const HeaderTitle = styled.div`
 
   > h4 {
     font-weight: 500;
-    color: #23c85b;
+    color: #626570;
   }
 `;
 
